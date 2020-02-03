@@ -35,7 +35,9 @@ As we haven't added any trigger yet, click on **Create a New trigger.**
 
 8) **Select type of time based trigger > Hour timer.**
 
-9) Click on **Save** and you are good to go. The script will run automatically twice a day and update your revives.
+9) **Select Hours interval** > **Every 12 hours**.
+
+10) Click on **Save** and you are good to go. The script will run automatically twice a day and update your revives.
 
 **For people who were using the previous versions of the code:**
 
@@ -48,6 +50,12 @@ As we haven't added any trigger yet, click on **Create a New trigger.**
 4) Remove the previous code and paste the new one there.
 
 5) Click on Save.
+
+
+## Bonus Tip:
+***You can update the sheet manually, by using the Custom Menu added in the sheet.***
+
+
 
 **NOTE**
 
