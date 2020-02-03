@@ -53,7 +53,7 @@ As we haven't added any trigger yet, click on **Create a New trigger.**
 
 
 ## Bonus Tip:
-***You can update the sheet manually, by using the Custom Menu added in the sheet.***
+***You can update the sheet manually, by using the Custom Menu added in the sheet. To use it Click on Run Manually > Update Sheet.***
 
 
 
