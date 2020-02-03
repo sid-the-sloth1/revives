@@ -1,36 +1,34 @@
 function myFunction() {
 
-    var sh = SpreadsheetApp.getActiveSpreadsheet(); //Getting the spreadsheet which is active
+    var ss = SpreadsheetApp.getActiveSpreadsheet(); //Getting the spreadsheet which is active
 
-    var ss = sh.getSheetByName("Log"); //get the worksheet inside the spreadsheet
+    var sh = ss.getSheetByName("Log"); //get the worksheet inside the spreadsheet
 
-    var sd = sh.getSheetByName("Key");
+    var sd = ss.getSheetByName("Key");
 
-    ss.sort(1, false);
+    sh.sort(1, false);
 
-    var last_entry = ss.getRange("A2").getValue();
+    var properties = PropertiesService.getUserProperties();
+
+    var last_entry = sh.getRange("A2").getValue();
 
     var api = sd.getRange('B1').getValue(); // get value of API key
 
-    var user_id_ = sd.getRange('B3');
+    var user_id = properties.getProperty('user_id');
 
-    if (user_id_.isBlank()) {
+    //Logger.log(user_id);
+
+    if (!user_id) {
 
         var call_url = 'https://api.torn.com/user/?selections=profile&key='+api;
 
         var profile = JSON.parse(UrlFetchApp.fetch(call_url));
 
-        var player_id = profile["player_id"];
+        var user_id = profile["player_id"];
 
-        user_id_.setValue(player_id);
-
-    } else {
-
-        var player_id = user_id_.getValue();
+        properties.setProperty('user_id', user_id);
 
     }
-
-  
 
     //API call
 
@@ -42,17 +40,17 @@ function myFunction() {
 
     var apidata = JSON.parse(content);
 
-    var place = {};
+    var newDict = {};
 
-    place["revives"] = {};
+    newDict["revives"] = {};
 
     for (k in apidata["revives"]) {
 
         if (apidata["revives"][k]["timestamp"] > last_entry) {
 
-            if (apidata["revives"][k]["reviver_id"] == player_id) {
+            if (apidata["revives"][k]["reviver_id"] == user_id) {
 
-                place["revives"][k] = apidata["revives"][k];
+                newDict["revives"][k] = apidata["revives"][k];
 
             }
 
@@ -60,57 +58,43 @@ function myFunction() {
 
     }
 
-    var log = JSON.stringify(place);
-
-    var test = JSON.parse(log);
-
-    
+    var unique = JSON.parse(JSON.stringify(newDict));
 
     //Converting Timestamp in revive data to readable time
 
-    for (var i in test["revives"]) {
+    for (var k in unique["revives"]) {
 
-        test.revives[i]["time"] = Utilities.formatDate(new Date(test.revives[i]["timestamp"]*1000), "GMT", "dd MMMM yyyy  hh:mm:ss a") + "  TCT";
-
-    }
-
-    var final_a = JSON.stringify(test);
-
-    var final = JSON.parse(final_a);
-
-    var array = []; //creating an empty array to count total number of revives
-
-    for (var m in final["revives"]) {
-
-        array.push(m);
+        unique.revives[k]["time"] = Utilities.formatDate(new Date(unique.revives[k]["timestamp"]*1000), "GMT", "dd MMMM yyyy  hh:mm:ss a");
 
     }
 
-    var elem = array.length;
+    var final = JSON.parse(JSON.stringify(unique));
 
-    if (elem > 0) {
+    //Parsing JSON to write it in the spreadsheet
 
-        ss.insertRowsBefore(2, elem);
+    var dataSet = final.revives;
 
-        //Parsing JSON to write it in the spreadsheet
+    var rows = [];
 
-        var dataSet = final.revives;
+    for (var i in dataSet) {
 
-        var rows = [];
+        var revives = dataSet[i];
 
-        for (var i in dataSet) {
+        rows.push([revives.timestamp, revives.reviver_id, revives.reviver_name, revives.reviver_faction, revives.reviver_factionname, revives.target_id, revives.target_name, revives.target_faction, revives.target_factionname, revives.time]);
 
-            var revives = dataSet[i];
+    }
 
-            rows.push([revives.timestamp, revives.reviver_id, revives.reviver_name, revives.reviver_faction, revives.reviver_factionname, revives.target_id, revives.target_name, revives.target_faction, revives.target_factionname, revives.time]);
+    var length = rows.length;
 
-        }
+    if (length > 0) {
 
-        var datarange = ss.getRange(2, 1, elem, 10);
+        sh.insertRowsAfter(1, length);
+
+        var datarange = sh.getRange(2, 1, length, 10);
 
         datarange.setValues(rows) //writing data
 
-        ss.sort(1, false);
+        sh.sort(1, false);
 
     }
 
@@ -121,8 +105,6 @@ function myFunction() {
     var upcell = sd.getRange("B2").setValue(uptime);
 
 }
-
-//adding button to Spreadsheet
 
 function onOpen(e) {
 
