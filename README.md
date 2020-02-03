@@ -65,3 +65,4 @@ B) If you ever reset your API key, make sure to update the key in the Spreadshee
 
 If you have any questions feel free to ask.
 
+[![](https://www.torn.com/signature.php?id=5&user=2131687&v=1528808940574)](https://www.torn.com/profiles.php?XID=2131687#/)
