@@ -8,38 +8,23 @@ function myFunction() {
 
     sh.sort(1, false);
 
-    var properties = PropertiesService.getUserProperties();
 
     var last_entry = sh.getRange("A2").getValue();
 
     var api = sd.getRange('B1').getValue(); // get value of API key
 
-    var user_id = properties.getProperty('user_id');
 
-    //Logger.log(user_id);
-
-    if (!user_id) {
-
-        var call_url = 'https://api.torn.com/user/?selections=profile&key='+api;
-
-        var profile = JSON.parse(UrlFetchApp.fetch(call_url));
-
-        var user_id = profile["player_id"];
-
-        properties.setProperty('user_id', user_id);
-
-    }
 
     //API call
 
-    var url = "https://api.torn.com/user/?selections=revives&key=" +  api;
+    var url = "https://api.torn.com/user/?selections=profile,revives&key=" +  api;
 
     var content = UrlFetchApp.fetch(url);
 
     //Reading new data from API
 
     var apidata = JSON.parse(content);
-
+    var user_id = apidata["player_id"];
     var newDict = {};
 
     newDict["revives"] = {};
@@ -83,7 +68,6 @@ function myFunction() {
         rows.push([revives.timestamp, revives.reviver_id, revives.reviver_name, revives.reviver_faction, revives.reviver_factionname, revives.target_id, revives.target_name, revives.target_faction, revives.target_factionname, revives.time]);
 
     }
-
     var length = rows.length;
 
     if (length > 0) {
@@ -105,7 +89,6 @@ function myFunction() {
     var upcell = sd.getRange("B2").setValue(uptime);
 
 }
-
 function onOpen(e) {
 
     var menu = SpreadsheetApp.getUi().createMenu('Run Manually')
