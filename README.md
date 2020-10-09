@@ -1,7 +1,7 @@
 Hi. 
 
 
-Are you an **active reviver** who is looking for a **free tool** to keep track of their revives? or are you **someone who often gets into trouble**and occasionally hire Revivers and looking for a **way to count those revives**?
+Are you an **active reviver** who is looking for a **free tool** to keep track of their revives? or are you **someone who often gets into trouble** and occasionally hire Revivers and looking for a **way to count those revives**?
 
 
 Well look no further. With the blessings of Church I brought a new tool for all of you. It is easy to set-up, open source and **Free**.
@@ -106,7 +106,8 @@ I have tried to explain why the permissions are required but if anyone of you st
 
 
 **Note: 1) All times and dates should be according to TCT.**
-**2) APi has last 100 revives. This 100 has both outgoing and incoming revives. So you choose the update Interval carefully so that in b/w 2 consecutive updates you don't give  and get more than a combined total of 100 revives**
+
+**2) API has last 100 revives. This 100 has both outgoing and incoming revives. So you choose the update Interval carefully so that in b/w 2 consecutive updates you don't give  and get more than a combined total of 100 revives**
 
 
 
