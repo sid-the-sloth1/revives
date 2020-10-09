@@ -1,68 +1,114 @@
-# revives
-Hi everyone. I am a reviver by both  passion and profession. I have been using Python to track my revives until now. I recently decided to move to Google App Scripts to automate the process. I have created a spreadsheet to automatically track my revives using data pulled from API.  I am going to share the code with you and guide you about how to set it up. I have tried to explain what code does with the help of comments in the code and by telling how it works at end of this post. But if you have any questions or reservations about it feel free to ask away.
-
-**For people who are using it for first time:**
-
-1) Open this [Spreadsheet](https://docs.google.com/spreadsheets/d/10UHLfoAkirrP8JWpc1djQYYx-rj21dIsj9ymusSZOLM/edit?usp=drivesdk) .
-
-Click on **File  > Make a Copy**.
-
-This will create a new Spreadsheet just like this one + it's code. You will be the sole person with access to that spreadsheet. 
-
-You can now delete the original spreadsheet. 
-
-2) In the second page of the copied Spreadsheet add your API.
-
-3) Click on **Tools > Script Editor**.
-
-4) It will open the Script Console. Click on **Run > Run Function > myFunction.**
-
-When you run the code for first time it will ask you to provide permission to the script to run and access your **Google sheets**(the reason behind accessing this one is obvious, I guess) and to connect to an external Site (Torn API).
-
-Once you provide the necessary permissions the script will run. You can see the results by opening the spreadsheet.
-
-5) Now comes the part of adding triggers. More information about triggers can be found [here](https://developers.google.com/apps-script/guides/triggers) and [here](https://developers.google.com/apps-script/guides/triggers/installable) .
-
- Revive API gives data about last *100 revives.*So logging the data by running the script just once a day is sufficient in normal conditions. But it is your choice. 
-
-I am gonna run my script once every 12 hours. Below are the steps for that.
-
-6) Click on **Edit > Current project's triggers.**
-
-As we haven't added any trigger yet, click on **Create a New trigger.**
-
-7) Select **Even Source > Time-driven**
-
-8) **Select type of time based trigger > Hour timer.**
-
-9) **Select Hours interval** > **Every 12 hours**.
-
-10) Click on **Save** and you are good to go. The script will run automatically twice a day and update your revives.
-
-**For people who were using the previous versions of the code:**
-
-1) Open the [Spreadsheet](https://docs.google.com/spreadsheets/d/10UHLfoAkirrP8JWpc1djQYYx-rj21dIsj9ymusSZOLM/edit?usp=drivesdk).  Click on **Tools > Script Editor**.
-
-2) Select the whole code and copy it.
-
-3) Now open your Spreadsheet that you use to track revives. Click on Tools > Script Editor.
-
-4) Remove the previous code and paste the new one there.
-
-5) Click on Save.
+Hi. 
 
 
-## Bonus Tip:
-***You can update the sheet manually, by using the Custom Menu added in the sheet. To use it Click on Run Manually > Update Sheet.***
+Are you an **active reviver** who is looking for a **free tool** to keep track of their revives? or are you **someone who often gets into trouble** and occasionally hire Revivers and looking for a **way to count those revives**?
+
+
+Well look no further. With the blessings of Church I brought a new tool for all of you. It is easy to set-up, open source and **Free**.
+
+**Features:**
+1) It records the revives you do.
+2) It records the revives you receive.
+3) It lets you filter the revives.
+4) It updates the new revives automatically.
+
+
+**How to use it?**
+
+**For PC**: 
+
+1) Open this [Spreadsheet
+](https://docs.google.com/spreadsheets/d/1NO6hTa44xGm7_mIlKqqLFUrhvIgzgZp-ubxJCZKCpZk/edit?usp=drivesdk)
+2) Click on **File > Make a Copy**.
+
+3) Inside the Spreadsheet there are multiple sheets. Find **"Key"** sheet inside. Inside it enter your **API key** in the **designated cell.** And  **select the frequency of Updates** with the help the **Drop-down menu in B3 Cell.**
+4) Click on **Tools > Script Editor.**
+5) Click on **Run > Run Function > firstRun.**
+6) When the code is run for first time it will ask you to provide it 3  permissions.  Grant those permissions. 
+
+  **To access and edit your Spreadsheets.:** This permission is need because we are working with a Spreadsheet so the code will modify the Spreadsheet.
+
+**To connect to an external service:** It is required because the code is getting your **Revives data** from the **Torn API**. And Torn API is an external service for Google Sheets.
+
+**To run when you are not around**: In Google App Scripts you need to add triggers to make a code run on regular intervals. In my previous sheet, the users had to manually add triggers to their sheets and many of them used to get confused. So in this version I have made it possible to automatically add triggers through the code. This permission is needed so the code can add triggers to itself.
+
+I have tried to explain why the permissions are required but if anyone of you still have a doubt you are more than free to ask questions and get my code checked by 3rd party for malicious code.
+
+
+ **After giving permissions the code will run. If you done everything as above then your Spreadsheet is set up and it will automatically log new revives on regular intervals depending upon the option you chose.**
+
+**Go to ***"Search"*** sheet to filter your revives.**
+
+**Now you can manually update the revives from inside the Spreadsheet by clicking on ***"Run Manually"*** menu.**
+
+
+**For mobile users:**
+
+1) Open this [Spreadsheet](https://docs.google.com/spreadsheets/d/1NO6hTa44xGm7_mIlKqqLFUrhvIgzgZp-ubxJCZKCpZk/edit?usp=drivesdk) in **Google Chrome** on android. Click on **Edit Icon in right corner** and open the spreadsheet in **Google Sheets Android App**. After that close it and open **Google Sheets App** again. 
+
+
+**Note: If you have more than one Gmail Id signed in on the device then select the one that is on the top, otherwise you will have to sign out from all other accounts to Deploy the Spreadsheet.**
 
 
 
-**NOTE**
+2) Select the Spreadsheet and click on **Make a Copy.**
 
-A) Also if you have more than Gmail accounts opened in the browser, then make sure to use same account to use Google Sheets and Google Drive for this project.
+![](https://i.gyazo.com/e4a924002f785cd27e107121d9913c2c.jpg)
 
-B) If you ever reset your API key, make sure to update the key in the Spreadsheet.
 
-If you have any questions feel free to ask.
 
-[![](https://www.torn.com/signature.php?id=5&user=2131687&v=1528808940574)](https://www.torn.com/profiles.php?XID=2131687#/)
+3)  You can now remove this spreadsheet and use the Copied version. You will be the sole owner of the copied sheet.
+
+4) Open the copied Spreadsheet, 
+
+
+![](https://i.gyazo.com/5705c2b85ccdd09e7de80cd6d13c2c8d.jpg)
+
+
+
+The highlighted bit is the **scrollable** list of sheets inside the Spreadsheet. **Scroll right**and find a sheet named "**Key"**. In that sheet add your **API key** and select the **frequency of the updates using the drop-down.**
+
+5) After that **close the Google Sheets** app and open **Google Chrome.** Go to [script.google.com](https://script.google.com/home).
+
+6) Click on "**Revives Data**".
+
+
+![](https://i.gyazo.com/cd561f6f91bae213bf97b968230e4441.jpg)
+
+
+
+
+
+7). Click on "**Open Project**"
+
+
+![](https://i.gyazo.com/b9dc3c4cfc1a4a3b79a95cacb2eb1209.jpg)
+
+
+8) Click on **Run > Run Function > firstRun**
+
+When the code is run for first time it will ask you to provide it 3  permissions.  Grant those permissions. 
+
+  **To access and edit your Spreadsheets.:** This permission is need because we are working with a Spreadsheet so the code will modify the Spreadsheet.
+
+**To connect to an external service:** It is required because the code is getting your **Revives data** from the **Torn API**. And Torn API is an external service for Google Sheets.
+
+**To run when you are not around**: In Google App Scripts you need to add triggers to make a code run on regular intervals. In my previous sheet, the users had to manually add triggers to their sheets and many of them used to get confused. So in this version I have made it possible to automatically add triggers through the code. This permission is needed so the code can add triggers to itself.
+
+I have tried to explain why the permissions are required but if anyone of you still have a doubt you are more than free to ask questions and get my code checked by 3rd party for malicious code.
+
+
+**After giving permissions the code will run. If you done everything as above then your Spreadsheet is set up and it will automatically log new revives.**
+
+**Go to "Search" sheet to filter your revives.**
+
+
+
+
+**Note: 1) All times and dates should be according to TCT.**
+
+**2) API has last 100 revives. This 100 has both outgoing and incoming revives. So you choose the update Interval carefully so that in b/w 2 consecutive updates you don't give  and get more than a combined total of 100 revives**
+
+
+
+**If you have any questions feel free to PM me. And please share it with your other friends so that they don't pay money to others for using something that is free.**
